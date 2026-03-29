@@ -3,7 +3,7 @@
 STRINGS = {
     # ── App ──────────────────────────────────────────────────────────────
     "app_title": "Antigravity Fixer",
-    "app_version": "v2.0",
+    "app_version": "v1.0.0",
 
     # ── Status ───────────────────────────────────────────────────────────
     "ag_not_running": "✅ Antigravity is not running",
