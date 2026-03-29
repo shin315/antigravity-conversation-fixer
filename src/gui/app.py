@@ -30,6 +30,8 @@ WARNING = "#f59e0b"
 DANGER = "#ef4444"
 CORNER_RADIUS = 6
 FONT_FAMILY = "Segoe UI Variable"  # Win11 native; CTk falls back to Segoe UI
+DISABLED_TEXT = "#444444"           # Clearly dimmed text for disabled buttons
+DISABLED_FG = "#2a2a2a"            # Dimmed background for disabled primary button
 
 # Badge config: text label + tint color
 SOURCE_BADGES = {
@@ -151,6 +153,7 @@ class AntigravityFixerApp(ctk.CTk):
             border_color="#555555",
             hover_color="#3a3a3a",
             text_color=TEXT_PRIMARY,
+            text_color_disabled=DISABLED_TEXT,
             command=self._on_scan,
         )
         self.scan_btn.grid(row=5, column=0, sticky="ew", padx=16, pady=(0, 8))
@@ -221,9 +224,10 @@ class AntigravityFixerApp(ctk.CTk):
             corner_radius=CORNER_RADIUS,
             fg_color="transparent",
             border_width=1,
-            border_color="#555555",
+            border_color="#3a3a3a",
             hover_color="#3a3a3a",
             text_color=TEXT_SECONDARY,
+            text_color_disabled=DISABLED_TEXT,
             state="disabled",
             command=self._on_assign_workspace,
         )
@@ -313,6 +317,7 @@ class AntigravityFixerApp(ctk.CTk):
             corner_radius=CORNER_RADIUS,
             fg_color=ACCENT,
             hover_color=ACCENT_HOVER,
+            text_color_disabled=DISABLED_TEXT,
             state="disabled",
             command=self._on_fix,
         )
@@ -327,9 +332,10 @@ class AntigravityFixerApp(ctk.CTk):
             corner_radius=CORNER_RADIUS,
             fg_color="transparent",
             border_width=1,
-            border_color="#555555",
+            border_color="#3a3a3a",
             hover_color="#3a3a3a",
             text_color=TEXT_SECONDARY,
+            text_color_disabled=DISABLED_TEXT,
             state="disabled",
             command=self._on_launch,
         )
@@ -438,13 +444,41 @@ class AntigravityFixerApp(ctk.CTk):
             )
 
     # ═══════════════════════════════════════════════════════════════════════
+    #  Button State Helpers
+    # ═══════════════════════════════════════════════════════════════════════
+
+    def _set_fix_enabled(self):
+        """Enable the Fix button with full accent color."""
+        self.fix_btn.configure(state="normal", fg_color=ACCENT)
+
+    def _set_fix_disabled(self):
+        """Disable the Fix button with dimmed appearance."""
+        self.fix_btn.configure(state="disabled", fg_color=DISABLED_FG)
+
+    def _set_launch_enabled(self):
+        """Enable Launch button with visible border."""
+        self.launch_btn.configure(state="normal", border_color="#555555")
+
+    def _set_launch_disabled(self):
+        """Disable Launch button with dimmed border."""
+        self.launch_btn.configure(state="disabled", border_color="#3a3a3a")
+
+    def _set_ws_enabled(self):
+        """Enable Workspace button with visible border."""
+        self.ws_btn.configure(state="normal", border_color="#555555")
+
+    def _set_ws_disabled(self):
+        """Disable Workspace button with dimmed border."""
+        self.ws_btn.configure(state="disabled", border_color="#3a3a3a")
+
+    # ═══════════════════════════════════════════════════════════════════════
     #  Scan
     # ═══════════════════════════════════════════════════════════════════════
 
     def _on_scan(self):
         """Start scanning in a background thread."""
         self.scan_btn.configure(state="disabled")
-        self.fix_btn.configure(state="disabled")
+        self._set_fix_disabled()
         self.progress_bar.set(0)
         self.progress_label.configure(text=t("scanning"))
 
@@ -486,7 +520,7 @@ class AntigravityFixerApp(ctk.CTk):
         self.scan_btn.configure(state="normal")
 
         if self.conversations:
-            self.fix_btn.configure(state="normal")
+            self._set_fix_enabled()
             self._populate_conversation_list()
 
     # ═══════════════════════════════════════════════════════════════════════
@@ -499,7 +533,7 @@ class AntigravityFixerApp(ctk.CTk):
             widget.destroy()
         self.conv_rows = []
         self.selected_conv_id = None
-        self.ws_btn.configure(state="disabled")
+        self._set_ws_disabled()
         self.selected_info.configure(text="")
 
         if not self.conversations:
@@ -609,7 +643,7 @@ class AntigravityFixerApp(ctk.CTk):
         self.selected_conv_id = conv_id
         short_title = title[:35] if len(title) > 35 else title
         self.selected_info.configure(text=f"#{conv_id[:8]}… — {short_title}")
-        self.ws_btn.configure(state="normal")
+        self._set_ws_enabled()
 
         # Highlight selected row, clear others
         for i, row in enumerate(self.conv_rows):
@@ -638,7 +672,7 @@ class AntigravityFixerApp(ctk.CTk):
 
     def _on_fix(self):
         """Start fixing in a background thread."""
-        self.fix_btn.configure(state="disabled")
+        self._set_fix_disabled()
         self.scan_btn.configure(state="disabled")
         self.progress_bar.set(0)
         self.progress_label.configure(text=t("fixing"))
@@ -670,7 +704,7 @@ class AntigravityFixerApp(ctk.CTk):
         summary_short = t("fix_success", n=result.total)
 
         self.progress_label.configure(text=summary_short, text_color=SUCCESS)
-        self.launch_btn.configure(state="normal")
+        self._set_launch_enabled()
         self.scan_btn.configure(state="normal")
 
         # Show result summary as an inline banner in main area
