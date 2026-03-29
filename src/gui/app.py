@@ -2,7 +2,7 @@
 
 import threading
 import customtkinter as ctk
-from tkinter import filedialog, messagebox
+from tkinter import filedialog
 
 from src.core import fixer, process
 from src.core.fixer import Callbacks
@@ -29,6 +29,7 @@ SUCCESS = "#10b981"
 WARNING = "#f59e0b"
 DANGER = "#ef4444"
 CORNER_RADIUS = 6
+FONT_FAMILY = "Segoe UI Variable"  # Win11 native; CTk falls back to Segoe UI
 
 # Badge config: text label + tint color
 SOURCE_BADGES = {
@@ -86,7 +87,7 @@ class AntigravityFixerApp(ctk.CTk):
         self.title_label = ctk.CTkLabel(
             self.sidebar,
             text=t("app_title"),
-            font=ctk.CTkFont(size=18, weight="bold"),
+            font=ctk.CTkFont(family=FONT_FAMILY, size=18, weight="bold"),
             text_color=TEXT_PRIMARY,
             anchor="w",
         )
@@ -95,7 +96,7 @@ class AntigravityFixerApp(ctk.CTk):
         self.version_label = ctk.CTkLabel(
             self.sidebar,
             text=t("app_version"),
-            font=ctk.CTkFont(size=12),
+            font=ctk.CTkFont(family=FONT_FAMILY, size=12),
             text_color=TEXT_MUTED,
             anchor="w",
         )
@@ -113,7 +114,7 @@ class AntigravityFixerApp(ctk.CTk):
         self.status_dot = ctk.CTkLabel(
             status_container,
             text="●",
-            font=ctk.CTkFont(size=10),
+            font=ctk.CTkFont(family=FONT_FAMILY, size=10),
             text_color=TEXT_MUTED,
             width=16,
         )
@@ -122,7 +123,7 @@ class AntigravityFixerApp(ctk.CTk):
         self.status_label = ctk.CTkLabel(
             status_container,
             text="",
-            font=ctk.CTkFont(size=12),
+            font=ctk.CTkFont(family=FONT_FAMILY, size=12),
             text_color=TEXT_SECONDARY,
             anchor="w",
         )
@@ -132,7 +133,7 @@ class AntigravityFixerApp(ctk.CTk):
         self.count_label = ctk.CTkLabel(
             self.sidebar,
             text="",
-            font=ctk.CTkFont(size=12),
+            font=ctk.CTkFont(family=FONT_FAMILY, size=12),
             text_color=TEXT_MUTED,
             anchor="w",
         )
@@ -142,7 +143,7 @@ class AntigravityFixerApp(ctk.CTk):
         self.scan_btn = ctk.CTkButton(
             self.sidebar,
             text=t("btn_scan"),
-            font=ctk.CTkFont(size=13),
+            font=ctk.CTkFont(family=FONT_FAMILY, size=13),
             height=36,
             corner_radius=CORNER_RADIUS,
             fg_color="transparent",
@@ -160,7 +161,7 @@ class AntigravityFixerApp(ctk.CTk):
         self.lang_btn = ctk.CTkButton(
             self.sidebar,
             text=t("lang_switch"),
-            font=ctk.CTkFont(size=11),
+            font=ctk.CTkFont(family=FONT_FAMILY, size=11),
             height=28,
             corner_radius=CORNER_RADIUS,
             fg_color="transparent",
@@ -196,7 +197,7 @@ class AntigravityFixerApp(ctk.CTk):
         self.main_title = ctk.CTkLabel(
             header,
             text=t("col_title"),
-            font=ctk.CTkFont(size=15, weight="bold"),
+            font=ctk.CTkFont(family=FONT_FAMILY, size=15, weight="bold"),
             text_color=TEXT_PRIMARY,
             anchor="w",
         )
@@ -205,7 +206,7 @@ class AntigravityFixerApp(ctk.CTk):
         self.selected_info = ctk.CTkLabel(
             header,
             text="",
-            font=ctk.CTkFont(size=11),
+            font=ctk.CTkFont(family=FONT_FAMILY, size=11),
             text_color=TEXT_MUTED,
             anchor="e",
         )
@@ -214,7 +215,7 @@ class AntigravityFixerApp(ctk.CTk):
         self.ws_btn = ctk.CTkButton(
             header,
             text=t("btn_assign_ws"),
-            font=ctk.CTkFont(size=11),
+            font=ctk.CTkFont(family=FONT_FAMILY, size=11),
             width=140,
             height=28,
             corner_radius=CORNER_RADIUS,
@@ -244,13 +245,17 @@ class AntigravityFixerApp(ctk.CTk):
         header_frame.grid(row=0, column=0, sticky="ew", padx=8, pady=(6, 0))
         header_frame.grid_columnconfigure(1, weight=1)
 
-        hdr_font = ctk.CTkFont(size=11)
+        hdr_font = ctk.CTkFont(family=FONT_FAMILY, size=11)
         hdr_color = TEXT_MUTED
 
-        ctk.CTkLabel(header_frame, text=t("col_num"), width=32, font=hdr_font, text_color=hdr_color, anchor="e").grid(row=0, column=0, padx=(4, 8))
-        ctk.CTkLabel(header_frame, text=t("col_title"), font=hdr_font, text_color=hdr_color, anchor="w").grid(row=0, column=1, sticky="w")
-        ctk.CTkLabel(header_frame, text=t("col_source"), width=80, font=hdr_font, text_color=hdr_color).grid(row=0, column=2, padx=4)
-        ctk.CTkLabel(header_frame, text=t("col_workspace"), width=32, font=hdr_font, text_color=hdr_color).grid(row=0, column=3, padx=(4, 8))
+        self.hdr_num = ctk.CTkLabel(header_frame, text=t("col_num"), width=32, font=hdr_font, text_color=hdr_color, anchor="e")
+        self.hdr_num.grid(row=0, column=0, padx=(4, 8))
+        self.hdr_title = ctk.CTkLabel(header_frame, text=t("col_title"), font=hdr_font, text_color=hdr_color, anchor="w")
+        self.hdr_title.grid(row=0, column=1, sticky="w")
+        self.hdr_source = ctk.CTkLabel(header_frame, text=t("col_source"), width=80, font=hdr_font, text_color=hdr_color)
+        self.hdr_source.grid(row=0, column=2, padx=4)
+        self.hdr_ws = ctk.CTkLabel(header_frame, text=t("col_workspace"), width=32, font=hdr_font, text_color=hdr_color)
+        self.hdr_ws.grid(row=0, column=3, padx=(4, 8))
 
         # ── Scrollable List ──────────────────────────────────────────────
         self.conv_scroll = ctk.CTkScrollableFrame(
@@ -264,7 +269,7 @@ class AntigravityFixerApp(ctk.CTk):
         self.empty_label = ctk.CTkLabel(
             self.conv_scroll,
             text=t("empty_state"),
-            font=ctk.CTkFont(size=12),
+            font=ctk.CTkFont(family=FONT_FAMILY, size=12),
             text_color=TEXT_MUTED,
             wraplength=320,
         )
@@ -289,7 +294,7 @@ class AntigravityFixerApp(ctk.CTk):
         self.progress_label = ctk.CTkLabel(
             bottom,
             text="",
-            font=ctk.CTkFont(size=11),
+            font=ctk.CTkFont(family=FONT_FAMILY, size=11),
             text_color=TEXT_MUTED,
             anchor="w",
         )
@@ -302,7 +307,7 @@ class AntigravityFixerApp(ctk.CTk):
         self.fix_btn = ctk.CTkButton(
             btn_container,
             text=t("btn_fix"),
-            font=ctk.CTkFont(size=12, weight="bold"),
+            font=ctk.CTkFont(family=FONT_FAMILY, size=12, weight="bold"),
             width=120,
             height=32,
             corner_radius=CORNER_RADIUS,
@@ -316,7 +321,7 @@ class AntigravityFixerApp(ctk.CTk):
         self.launch_btn = ctk.CTkButton(
             btn_container,
             text=t("btn_launch"),
-            font=ctk.CTkFont(size=12),
+            font=ctk.CTkFont(family=FONT_FAMILY, size=12),
             width=140,
             height=32,
             corner_radius=CORNER_RADIUS,
@@ -330,10 +335,10 @@ class AntigravityFixerApp(ctk.CTk):
         )
         self.launch_btn.pack(side="left", padx=(0, 6))
 
-        close_btn = ctk.CTkButton(
+        self.close_btn = ctk.CTkButton(
             btn_container,
             text=t("btn_close"),
-            font=ctk.CTkFont(size=12),
+            font=ctk.CTkFont(family=FONT_FAMILY, size=12),
             width=80,
             height=32,
             corner_radius=CORNER_RADIUS,
@@ -342,7 +347,7 @@ class AntigravityFixerApp(ctk.CTk):
             text_color=TEXT_MUTED,
             command=self.destroy,
         )
-        close_btn.pack(side="left")
+        self.close_btn.pack(side="left")
 
     # ═══════════════════════════════════════════════════════════════════════
     #  Antigravity Process Check
@@ -356,33 +361,80 @@ class AntigravityFixerApp(ctk.CTk):
                 text=t("ag_running_short"),
                 text_color=WARNING,
             )
-            result = messagebox.askyesno(
-                t("app_title"),
-                f"{t('ag_running')}\n\n{t('ag_kill_confirm')}",
-            )
-            if result:
-                if process.kill_antigravity():
-                    self.status_dot.configure(text_color=SUCCESS)
-                    self.status_label.configure(
-                        text=t("ag_kill_success_short"),
-                        text_color=SUCCESS,
-                    )
-                else:
-                    self.status_dot.configure(text_color=DANGER)
-                    self.status_label.configure(
-                        text=t("ag_kill_fail_short"),
-                        text_color=DANGER,
-                    )
-                    self.scan_btn.configure(state="disabled")
-                    return
-            else:
-                self.scan_btn.configure(state="disabled")
-                return
+            self.scan_btn.configure(state="disabled")
+            self._show_infobar()
         else:
+            self._hide_infobar()
             self.status_dot.configure(text_color=SUCCESS)
             self.status_label.configure(
                 text=t("ag_not_running_short"),
                 text_color=SUCCESS,
+            )
+
+    def _show_infobar(self):
+        """Show an inline InfoBar in the sidebar warning that Antigravity is running."""
+        # Remove existing infobar if any
+        self._hide_infobar()
+
+        self.infobar = ctk.CTkFrame(
+            self.sidebar,
+            fg_color="#3d2e00",
+            corner_radius=CORNER_RADIUS,
+        )
+        # Insert after the scan button (row 5) — use row 5 and shift scan to after
+        # Actually, insert between divider and status: put it after count_label area
+        self.infobar.grid(row=5, column=0, sticky="ew", padx=16, pady=(0, 8))
+        # Shift scan button down
+        self.scan_btn.grid(row=8, column=0, sticky="ew", padx=16, pady=(0, 8))
+
+        self.infobar.grid_columnconfigure(0, weight=1)
+
+        infobar_text = ctk.CTkLabel(
+            self.infobar,
+            text=t("ag_running_detail"),
+            font=ctk.CTkFont(family=FONT_FAMILY, size=11),
+            text_color="#fbbf24",
+            anchor="w",
+            wraplength=170,
+        )
+        infobar_text.grid(row=0, column=0, sticky="w", padx=10, pady=(8, 4))
+
+        kill_btn = ctk.CTkButton(
+            self.infobar,
+            text=t("btn_kill_ag"),
+            font=ctk.CTkFont(family=FONT_FAMILY, size=11, weight="bold"),
+            height=28,
+            corner_radius=4,
+            fg_color="#b45309",
+            hover_color="#92400e",
+            text_color="#fff",
+            command=self._on_kill_antigravity,
+        )
+        kill_btn.grid(row=1, column=0, sticky="ew", padx=10, pady=(2, 8))
+
+    def _hide_infobar(self):
+        """Remove inline InfoBar if it exists."""
+        if hasattr(self, "infobar") and self.infobar is not None:
+            self.infobar.destroy()
+            self.infobar = None
+            # Restore scan button position
+            self.scan_btn.grid(row=5, column=0, sticky="ew", padx=16, pady=(0, 8))
+
+    def _on_kill_antigravity(self):
+        """Handle kill button click from InfoBar."""
+        if process.kill_antigravity():
+            self.status_dot.configure(text_color=SUCCESS)
+            self.status_label.configure(
+                text=t("ag_kill_success_short"),
+                text_color=SUCCESS,
+            )
+            self.scan_btn.configure(state="normal")
+            self._hide_infobar()
+        else:
+            self.status_dot.configure(text_color=DANGER)
+            self.status_label.configure(
+                text=t("ag_kill_fail_short"),
+                text_color=DANGER,
             )
 
     # ═══════════════════════════════════════════════════════════════════════
@@ -408,7 +460,9 @@ class AntigravityFixerApp(ctk.CTk):
             ))
 
         def on_error(msg):
-            self.after(0, lambda: messagebox.showerror(t("app_title"), msg))
+            self.after(0, lambda: self.progress_label.configure(
+                text=msg, text_color=DANGER,
+            ))
 
         callbacks = Callbacks(on_progress=on_progress, on_error=on_error)
 
@@ -453,7 +507,7 @@ class AntigravityFixerApp(ctk.CTk):
             self.empty_label = ctk.CTkLabel(
                 self.conv_scroll,
                 text=t("empty_state"),
-                font=ctk.CTkFont(size=12),
+                font=ctk.CTkFont(family=FONT_FAMILY, size=12),
                 text_color=TEXT_MUTED,
                 wraplength=320,
             )
@@ -485,7 +539,7 @@ class AntigravityFixerApp(ctk.CTk):
             text=str(index + 1),
             width=32,
             anchor="e",
-            font=ctk.CTkFont(size=12),
+            font=ctk.CTkFont(family=FONT_FAMILY, size=12),
             text_color=TEXT_MUTED,
         )
         num_label.grid(row=0, column=0, padx=(4, 8))
@@ -496,7 +550,7 @@ class AntigravityFixerApp(ctk.CTk):
             row_frame,
             text=title_text,
             anchor="w",
-            font=ctk.CTkFont(size=12),
+            font=ctk.CTkFont(family=FONT_FAMILY, size=12),
             text_color=TEXT_PRIMARY,
         )
         title_label.grid(row=0, column=1, sticky="w", padx=(0, 8))
@@ -510,7 +564,7 @@ class AntigravityFixerApp(ctk.CTk):
             row_frame,
             text=badge_text,
             width=80,
-            font=ctk.CTkFont(size=9, weight="bold"),
+            font=ctk.CTkFont(family=FONT_FAMILY, size=9, weight="bold"),
             text_color=badge_info["color"],
             fg_color="#3a3a3a",
             corner_radius=3,
@@ -526,7 +580,7 @@ class AntigravityFixerApp(ctk.CTk):
             row_frame,
             text=ws_text,
             width=32,
-            font=ctk.CTkFont(size=13),
+            font=ctk.CTkFont(family=FONT_FAMILY, size=13),
             text_color=ws_color,
         )
         ws_label.grid(row=0, column=3, padx=(4, 8))
@@ -613,18 +667,90 @@ class AntigravityFixerApp(ctk.CTk):
         self.progress_bar.set(1.0)
         stats = result.by_source
 
-        summary = (
-            f"{t('fix_success', n=result.total)}\n\n"
-            f"{t('fix_stats', brain=stats.get('brain', 0), preserved=stats.get('preserved', 0), fallback=stats.get('fallback', 0))}\n"
-            f"{t('fix_ws_stats', ws=result.workspaces_mapped, ts=result.timestamps_injected)}\n\n"
-            f"{t('fix_reopen')}"
-        )
+        summary_short = t("fix_success", n=result.total)
 
-        self.progress_label.configure(text=t("fix_success", n=result.total))
+        self.progress_label.configure(text=summary_short, text_color=SUCCESS)
         self.launch_btn.configure(state="normal")
         self.scan_btn.configure(state="normal")
 
-        messagebox.showinfo(t("app_title"), summary)
+        # Show result summary as an inline banner in main area
+        self._show_result_banner(result)
+
+    def _show_result_banner(self, result):
+        """Show an inline success banner in the main area after fix completes."""
+        # Remove previous banner if any
+        self._hide_result_banner()
+
+        stats = result.by_source
+        brain = stats.get("brain", 0)
+        preserved = stats.get("preserved", 0)
+        fallback = stats.get("fallback", 0)
+
+        self.result_banner = ctk.CTkFrame(
+            self.main_frame,
+            fg_color="#0c3b2e",
+            corner_radius=CORNER_RADIUS,
+        )
+        # Insert at top of main area (before the list)
+        self.result_banner.grid(row=0, column=0, sticky="ew", padx=16, pady=(16, 4))
+        # Shift main header down
+        self.main_frame.winfo_children()[1].grid(row=1, column=0, sticky="ew", padx=16, pady=(4, 4))
+
+        self.result_banner.grid_columnconfigure(0, weight=1)
+
+        title_line = ctk.CTkLabel(
+            self.result_banner,
+            text=t("fix_success", n=result.total),
+            font=ctk.CTkFont(family=FONT_FAMILY, size=13, weight="bold"),
+            text_color=SUCCESS,
+            anchor="w",
+        )
+        title_line.grid(row=0, column=0, sticky="w", padx=12, pady=(10, 2))
+
+        detail_text = (
+            f"● {brain} brain   ● {preserved} "
+            f"{t('source_preserved')}   ● {fallback} "
+            f"{t('source_fallback')}   |   "
+            f"{result.workspaces_mapped} ws   {result.timestamps_injected} ts"
+        )
+        detail_line = ctk.CTkLabel(
+            self.result_banner,
+            text=detail_text,
+            font=ctk.CTkFont(family=FONT_FAMILY, size=11),
+            text_color="#6ee7b7",
+            anchor="w",
+        )
+        detail_line.grid(row=1, column=0, sticky="w", padx=12, pady=(0, 2))
+
+        reopen_line = ctk.CTkLabel(
+            self.result_banner,
+            text=t("fix_reopen"),
+            font=ctk.CTkFont(family=FONT_FAMILY, size=11),
+            text_color=TEXT_MUTED,
+            anchor="w",
+        )
+        reopen_line.grid(row=2, column=0, sticky="w", padx=12, pady=(0, 10))
+
+        # Dismiss button
+        dismiss_btn = ctk.CTkButton(
+            self.result_banner,
+            text="✕",
+            width=24,
+            height=24,
+            corner_radius=4,
+            font=ctk.CTkFont(family=FONT_FAMILY, size=12),
+            fg_color="transparent",
+            hover_color="#1a5c45",
+            text_color=TEXT_MUTED,
+            command=self._hide_result_banner,
+        )
+        dismiss_btn.grid(row=0, column=1, sticky="ne", padx=(0, 6), pady=(6, 0))
+
+    def _hide_result_banner(self):
+        """Remove inline result banner if it exists."""
+        if hasattr(self, "result_banner") and self.result_banner is not None:
+            self.result_banner.destroy()
+            self.result_banner = None
 
     # ═══════════════════════════════════════════════════════════════════════
     #  Launch
@@ -633,9 +759,9 @@ class AntigravityFixerApp(ctk.CTk):
     def _on_launch(self):
         """Launch Antigravity."""
         if process.launch_antigravity():
-            self.progress_label.configure(text=t("ag_launch_success"))
+            self.progress_label.configure(text=t("ag_launch_success"), text_color=SUCCESS)
         else:
-            messagebox.showwarning(t("app_title"), t("ag_launch_fail"))
+            self.progress_label.configure(text=t("ag_launch_fail"), text_color=DANGER)
 
     # ═══════════════════════════════════════════════════════════════════════
     #  Language Toggle
@@ -660,14 +786,31 @@ class AntigravityFixerApp(ctk.CTk):
         # Status
         if process.is_antigravity_running():
             self.status_label.configure(text=t("ag_running_short"))
+            # Rebuild infobar with new language
+            if hasattr(self, "infobar") and self.infobar is not None:
+                self._show_infobar()
         else:
             self.status_label.configure(text=t("ag_not_running_short"))
+
+        # Column headers
+        self.hdr_num.configure(text=t("col_num"))
+        self.hdr_title.configure(text=t("col_title"))
+        self.hdr_source.configure(text=t("col_source"))
+        self.hdr_ws.configure(text=t("col_workspace"))
 
         # Main area
         self.main_title.configure(text=t("col_title"))
         self.ws_btn.configure(text=t("btn_assign_ws"))
         self.fix_btn.configure(text=t("btn_fix"))
         self.launch_btn.configure(text=t("btn_launch"))
+        self.close_btn.configure(text=t("btn_close"))
+
+        # Empty state (if visible)
+        if hasattr(self, "empty_label") and self.empty_label is not None:
+            try:
+                self.empty_label.configure(text=t("empty_state"))
+            except Exception:
+                pass
 
         # Count
         if self.conversations:
