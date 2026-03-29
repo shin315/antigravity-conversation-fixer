@@ -31,13 +31,14 @@ Vì cơ chế bảo mật của máy Mac (Gatekeeper) rất gắt gao và ngăn 
 
 1. **Tải về**: Bấm nút xanh **Code** > **Download ZIP** ở trên cùng trang này và giải nén thư mục ra.
 2. **Mở thư mục**: Khởi động chính màn hình ứng dụng **Antigravity** của bạn. Kéo thả thư mục Antigravity Fixer vừa giải nén vào cửa sổ để mở project lên.
-3. **Mở Bảng lệnh (Terminal)**: Trên Menu bar trên cùng, chọn **View > Terminal** (hoặc bấm dấu \`Ctrl + \`\`).
+3. **Mở Bảng lệnh (Terminal)**: Trên Menu bar trên cùng, chọn **View > Terminal** (hoặc bấm phím \`Ctrl + \`\`).
 4. **Khởi chạy**: Dán nguyên dòng mã này vào Terminal rồi nhấn Enter:
    ```bash
    bash start_mac.command
    ```
 5. Xong! Bạn chỉ cần ngồi đợi 1 chút để code tự tải thư viện. Giao diện (GUI) của phần mềm sẽ hiện ra y hệt Windows!
 
+> **Lưu ý riêng cho macOS:** Giao diện app yêu cầu bộ thư viện giao diện `tkinter` của Python. Nếu máy bạn chưa có, script sẽ cố gắng tự cài đặt thông qua **Homebrew**. Trong trường hợp máy không có Homebrew, script sẽ tự động mở trang chủ **python.org** để bạn tải bộ cài chính thức (đã tích hợp sẵn `tkinter`).
 
 
 ## Tính năng
