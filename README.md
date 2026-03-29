@@ -27,18 +27,20 @@ Sửa lỗi mất conversation history, sai thứ tự, và mất workspace tron
 
 ## 🍎 Quick Start (macOS / Dành cho Non-tech)
 
-Vì cơ chế bảo mật của máy Mac (Gatekeeper) rất gắt gao và ngăn chặn double-click các file lạ lấy từ trên mạng, cách DỄ VÀ AN TOÀN NHẤT cho anh em là tận dụng chính trình soạn thảo Antigravity:
+Vì tool cần sửa database của Antigravity, bạn **bắt buộc phải tắt Antigravity** trước khi chạy. Do cơ chế bảo mật của máy Mac không cho double-click file lạ nên chúng ta sẽ chạy 1 lệnh nhỏ qua Terminal gốc của máy:
 
-1. **Tải về**: Bấm nút xanh **Code** > **Download ZIP** ở trên cùng trang này và giải nén thư mục ra.
-2. **Mở thư mục**: Khởi động chính màn hình ứng dụng **Antigravity** của bạn. Kéo thả thư mục Antigravity Fixer vừa giải nén vào cửa sổ để mở project lên.
-3. **Mở Bảng lệnh (Terminal)**: Trên Menu bar trên cùng, chọn **View > Terminal** (hoặc bấm phím \`Ctrl + \`\`).
-4. **Khởi chạy**: Dán nguyên dòng mã này vào Terminal rồi nhấn Enter:
+1. **Tắt Antigravity**: Đảm bảo bạn đã tắt hoàn toàn ứng dụng Antigravity (Bấm chuột phải vào icon ở thanh Dock dưới cùng -> chọn **Quit**).
+2. **Tải tool**: Bấm nút xanh **Code** > **Download ZIP** ở trên cùng trang Github này và giải nén thư mục ra.
+3. **Mở Terminal của Mac**: Nhấn tổ hợp phím `Cmd + Space` (hoặc mở Spotlight), gõ chữ **Terminal** và mở ứng dụng Terminal (biểu tượng màu đen màn hình console).
+4. **Trỏ đường dẫn**: Trong cửa sổ Terminal, gõ chữ `cd ` (chữ cd và 1 dấu cách). Sau đó, kéo thả thư mục tool (thư mục bạn vừa giải nén ở bước 2) vào cửa sổ Terminal đó và ấn Enter.
+5. **Khởi chạy**: Dán nguyên dòng mã này vào Terminal rồi nhấn Enter:
    ```bash
    bash start_mac.command
    ```
-5. Xong! Bạn chỉ cần ngồi đợi 1 chút để code tự tải thư viện. Giao diện (GUI) của phần mềm sẽ hiện ra y hệt Windows!
+6. Xong! Bạn chỉ cần ngồi đợi 1 chút để code tự cài thư viện. Giao diện (GUI) của phần mềm sẽ hiện ra y hệt Windows!
 
 > **Lưu ý riêng cho macOS:** Giao diện app yêu cầu bộ thư viện giao diện `tkinter` của Python. Nếu máy bạn chưa có, script sẽ cố gắng tự cài đặt thông qua **Homebrew**. Trong trường hợp máy không có Homebrew, script sẽ tự động mở trang chủ **python.org** để bạn tải bộ cài chính thức (đã tích hợp sẵn `tkinter`).
+
 
 
 ## Tính năng
