@@ -7,11 +7,15 @@ STRINGS = {
 
     # ── Status ───────────────────────────────────────────────────────────
     "ag_not_running": "✅ Antigravity is not running",
+    "ag_not_running_short": "Antigravity not running",
     "ag_running": "⚠️ Antigravity is running!",
+    "ag_running_short": "Antigravity is running",
     "ag_running_detail": "Antigravity must be closed before fixing.",
     "ag_kill_confirm": "Kill Antigravity automatically?",
     "ag_kill_success": "✅ Antigravity has been closed",
+    "ag_kill_success_short": "Antigravity closed",
     "ag_kill_fail": "❌ Could not close Antigravity. Please close it manually.",
+    "ag_kill_fail_short": "Could not close. Please close manually.",
     "ag_launch_success": "🚀 Antigravity launched",
     "ag_launch_fail": "Could not find Antigravity. Please open it manually.",
 
@@ -58,14 +62,17 @@ STRINGS = {
     "error_generic": "Error: {msg}",
 
     # ── Buttons (GUI) ────────────────────────────────────────────────────
-    "btn_scan": "🔍 Scan",
-    "btn_fix": "⚡ Fix All",
-    "btn_close": "❌ Close",
-    "btn_launch": "🚀 Open Antigravity",
-    "btn_assign_ws": "📁 Assign Workspace...",
+    "btn_scan": "Scan",
+    "btn_fix": "Fix All",
+    "btn_close": "Close",
+    "btn_launch": "Open Antigravity",
+    "btn_assign_ws": "Assign Workspace",
     "btn_kill_ag": "Kill Antigravity",
     "btn_yes": "Yes",
     "btn_no": "No",
+
+    # ── GUI Layout ───────────────────────────────────────────────────────
+    "empty_state": "Press Scan on the left to start searching for conversations...",
 
     # ── Table Headers ────────────────────────────────────────────────────
     "col_num": "#",

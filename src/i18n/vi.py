@@ -7,11 +7,15 @@ STRINGS = {
 
     # ── Status ───────────────────────────────────────────────────────────
     "ag_not_running": "✅ Antigravity không chạy",
+    "ag_not_running_short": "Antigravity không chạy",
     "ag_running": "⚠️ Antigravity đang chạy!",
+    "ag_running_short": "Antigravity đang chạy",
     "ag_running_detail": "Cần tắt Antigravity trước khi sửa.",
     "ag_kill_confirm": "Tắt Antigravity tự động?",
     "ag_kill_success": "✅ Đã tắt Antigravity",
+    "ag_kill_success_short": "Đã tắt Antigravity",
     "ag_kill_fail": "❌ Không thể tắt Antigravity. Vui lòng tắt thủ công.",
+    "ag_kill_fail_short": "Không thể tắt. Vui lòng tắt thủ công.",
     "ag_launch_success": "🚀 Đã mở Antigravity",
     "ag_launch_fail": "Không tìm thấy Antigravity. Vui lòng mở thủ công.",
 
@@ -58,14 +62,17 @@ STRINGS = {
     "error_generic": "Lỗi: {msg}",
 
     # ── Buttons (GUI) ────────────────────────────────────────────────────
-    "btn_scan": "🔍 Quét",
-    "btn_fix": "⚡ Sửa tất cả",
-    "btn_close": "❌ Đóng",
-    "btn_launch": "🚀 Mở Antigravity",
-    "btn_assign_ws": "📁 Gán Workspace...",
+    "btn_scan": "Quét",
+    "btn_fix": "Sửa tất cả",
+    "btn_close": "Đóng",
+    "btn_launch": "Mở Antigravity",
+    "btn_assign_ws": "Gán Workspace",
     "btn_kill_ag": "Tắt Antigravity",
     "btn_yes": "Có",
     "btn_no": "Không",
+
+    # ── GUI Layout ───────────────────────────────────────────────────────
+    "empty_state": "Nhấn nút Quét bên trái để bắt đầu tìm kiếm conversations...",
 
     # ── Table Headers ────────────────────────────────────────────────────
     "col_num": "#",
