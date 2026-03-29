@@ -30,10 +30,11 @@ Sửa lỗi mất conversation history, sai thứ tự, và mất workspace tron
 Trên hệ điều hành Mac (macOS), vì không hỗ trợ file `.exe`, bạn chỉ cần chạy trực tiếp từ mã nguồn:
 
 1. **Tải về**: Bấm vào nút màu xanh (Code) trên cùng trang này > **Download ZIP** rồi giải nén ra một thư mục.
-2. **Cấp quyền chạy mã lệnh** (Chỉ cần làm 1 lần duy nhất): 
-   - Bấm `Cmd + Space` gõ chữ **Terminal** rồi nhấn Enter.
-   - Gõ `chmod +x ` (nhớ có 1 khoảng trắng (dấu cách) ở cuối).
-   - Kéo file `start_mac.command` (trong thư mục vừa giải nén) thả vào cửa sổ Terminal rồi nhấn Enter.
+2. **Cấp quyền chạy** (Chỉ làm 1 lần duy nhất): 
+   - Bấm `Cmd + Space` gõ chữ **Terminal** rồi mở nó lên.
+   - Gõ `chmod +x ` (nhớ gõ thêm **1 dấu cách** ở cuối, và **KHOAN HÃY NHẤN ENTER**).
+   - Dùng chuột kéo file `start_mac.command` thả vào cửa sổ Terminal.
+   - Lúc này dòng lệnh sẽ trông giống như vầy: `chmod +x /Users/ten-ban/Downloads/start_mac.command`. Bây giờ mới **Nhấn Enter**.
 3. **Mở Tool**: Từ giờ về sau, bạn chỉ cần **Double-click (nhấp đúp)** vào file `start_mac.command` là giao diện sẽ tự động quét, tự cài đặt thư viện và hiện lên y hệt Windows!
 
 
