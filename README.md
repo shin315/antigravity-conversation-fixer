@@ -27,15 +27,17 @@ Sửa lỗi mất conversation history, sai thứ tự, và mất workspace tron
 
 ## 🍎 Quick Start (macOS / Dành cho Non-tech)
 
-Trên hệ điều hành Mac (macOS), vì không hỗ trợ file `.exe`, bạn chỉ cần chạy trực tiếp từ mã nguồn:
+Vì cơ chế bảo mật của máy Mac (Gatekeeper) rất gắt gao và ngăn chặn double-click các file lạ lấy từ trên mạng, cách DỄ VÀ AN TOÀN NHẤT cho anh em là tận dụng chính trình soạn thảo Antigravity:
 
-1. **Tải về**: Bấm vào nút màu xanh (Code) trên cùng trang này > **Download ZIP** rồi giải nén ra một thư mục.
-2. **Cấp quyền chạy** (Chỉ làm 1 lần duy nhất): 
-   - Bấm `Cmd + Space` gõ chữ **Terminal** rồi mở nó lên.
-   - Gõ `chmod +x ` (nhớ gõ thêm **1 dấu cách** ở cuối, và **KHOAN HÃY NHẤN ENTER**).
-   - Dùng chuột kéo file `start_mac.command` thả vào cửa sổ Terminal.
-   - Lúc này dòng lệnh sẽ trông giống như vầy: `chmod +x /Users/ten-ban/Downloads/start_mac.command`. Bây giờ mới **Nhấn Enter**.
-3. **Mở Tool**: Từ giờ về sau, bạn chỉ cần **Double-click (nhấp đúp)** vào file `start_mac.command` là giao diện sẽ tự động quét, tự cài đặt thư viện và hiện lên y hệt Windows!
+1. **Tải về**: Bấm nút xanh **Code** > **Download ZIP** ở trên cùng trang này và giải nén thư mục ra.
+2. **Mở thư mục**: Khởi động chính màn hình ứng dụng **Antigravity** của bạn. Kéo thả thư mục Antigravity Fixer vừa giải nén vào cửa sổ để mở project lên.
+3. **Mở Bảng lệnh (Terminal)**: Trên Menu bar trên cùng, chọn **View > Terminal** (hoặc bấm dấu \`Ctrl + \`\`).
+4. **Khởi chạy**: Dán nguyên dòng mã này vào Terminal rồi nhấn Enter:
+   ```bash
+   bash start_mac.command
+   ```
+5. Xong! Bạn chỉ cần ngồi đợi 1 chút để code tự tải thư viện. Giao diện (GUI) của phần mềm sẽ hiện ra y hệt Windows!
+
 
 
 ## Tính năng
